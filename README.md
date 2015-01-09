@@ -1,1 +1,1 @@
-The repository contains the practive solution for LeeCode Online questions
+The repository contains the practice solution for LeeCode Online questions
