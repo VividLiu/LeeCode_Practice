@@ -1,4 +1,22 @@
-70.
-u are climbing a stair case. It takes n steps to reach to the top.
+	70.
+	u are climbing a stair case. It takes n steps to reach to the top.
 
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+	Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+	
+	Thinking:
+	Use example to illustrate the problem.
+	When n = 3, the set of ways is: [1,1,1],   [2, 1], [1, 2]
+	When n = 4, the set of ways is: [1,1,1,1],   [2,1,1], [1,2,1], [1,1,2],   [2,2] 	
+	when n = 5, the set of ways is: [1,1,1,1,1],   [2,1,1,1], [1,2,1,1], [1,1,2,1], [1,1,1,2],   [2,2,1], [2,1,2], [1,2,2]
+
+	When the abstract problem are illustrated using specific number as example, it is easier to find the correaltion.
+
+	Assume S(n) is the solution for n, and we know all the solutions before n, then we can conclude the formula for this question.
+	S(n) = S(n-1) + S(n-1), typical Fibonacci question.
+
+	It make sense to apply the thinking back to the question. 
+	Since we can only take 1 or 2 steps each time, the final step to reach n stairs can either be 1 or 2. Thus, the number of ways to 
+	reach nth stair are the sum of the number of ways to reach (n-2)th stair then take 2 step and the number of ways to reach (n-1)th
+	stair and take 1 step.
+	
