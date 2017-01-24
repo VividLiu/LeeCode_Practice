@@ -25,11 +25,28 @@
 	* Solutions for Fibonacci question
 	********************************************************/
 	Method 1: Iterative method	
+	sudo code:
 	def Fibonacci(n):
 		n > 1? Fibonacci(n-1) + Fibonacci(n-2) : n;
 
-	Time Complexity: O(2^n)
+	Time Complexity: O(2^n). In order to solve F(n), two more F() need to be called. Thus, the time complexity is O(2^n)
 
-	Method 2:  
+	If we expand the complexity tree, it is not hard to see many redundant nodes. For example, F(n-2) needs to be called twice...F(1)
+	needs to be called 2^n times. If we could avoid the redundant computation and save the previous computation results for next one.
+	It can reduce the exponential time complexit. Here it comes the method 2. 
+
+	Method 2: Recursively compute from bottom to top. In order to solve F(n), solve F(2) = F(1) + F(0), save the result of F(2) and
+	F(1), thus F(3) = F(2) + F(1), then save the result of F(3) and F(2) to compute F(4), and so on.
+	
+	def Fibonacci(n):
+		if n <= 1:
+			return n;
+		i = 1; a = 0; b = 1;
+		while i < n:
+			tmp = b;
+			b = a + b;
+			a = tmp;
+			i++
+		return b;
 
 	Method 3: 
