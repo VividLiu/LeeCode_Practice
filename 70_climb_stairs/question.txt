@@ -1,52 +1,103 @@
-	70.
-	u are climbing a stair case. It takes n steps to reach to the top.
+70.
+u are climbing a stair case. It takes n steps to reach to the top.
 
-	Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-	/********************************************************	
-	* Thinking:
-	********************************************************/
-	Use example to illustrate the problem.
-	When n = 3, the set of ways is: [1,1,1],   [2, 1], [1, 2]
-	When n = 4, the set of ways is: [1,1,1,1],   [2,1,1], [1,2,1], [1,1,2],   [2,2] 	
-	when n = 5, the set of ways is: [1,1,1,1,1],   [2,1,1,1], [1,2,1,1], [1,1,2,1], [1,1,1,2],   [2,2,1], [2,1,2], [1,2,2]
+/********************************************************	
+* Thinking:
+********************************************************/
+Use example to illustrate the problem.
+When n = 3, the set of ways is: [1,1,1],   [2, 1], [1, 2]
+When n = 4, the set of ways is: [1,1,1,1],   [2,1,1], [1,2,1], [1,1,2],   [2,2] 	
+when n = 5, the set of ways is: [1,1,1,1,1],   [2,1,1,1], [1,2,1,1], [1,1,2,1], [1,1,1,2],   [2,2,1], [2,1,2], [1,2,2]
 
-	When the abstract problem are illustrated using specific number as example, it is easier to find the correaltion.
+When the abstract problem are illustrated using specific number as example, it is easier to find the correaltion.
 
-	Assume S(n) is the solution for n, and we know all the solutions before n, then we can conclude the formula for this question.
-	S(n) = S(n-1) + S(n-1); and S(0)=0, S(1)=1 typical Fibonacci question.
+Assume S(n) is the solution for n, and we know all the solutions before n, then we can conclude the formula for this question.
+S(n) = S(n-1) + S(n-1); and S(0)=0, S(1)=1 typical Fibonacci question.
 
-	It make sense to apply the thinking back to the question. 
-	Since we can only take 1 or 2 steps each time, the final step to reach n stairs can either be 1 or 2. Thus, the number of ways to 
-	reach nth stair are the sum of the number of ways to reach (n-2)th stair then take 2 step and the number of ways to reach (n-1)th
-	stair and take 1 step.
+It make sense to apply the thinking back to the question. 
+Since we can only take 1 or 2 steps each time, the final step to reach n stairs can either be 1 or 2. Thus, the number of ways to 
+reach nth stair are the sum of the number of ways to reach (n-2)th stair then take 2 step and the number of ways to reach (n-1)th
+stair and take 1 step.
 
-	/********************************************************	
-	* Solutions for Fibonacci question
-	********************************************************/
-	Method 1: Iterative method	
-	sudo code:
-	def Fibonacci(n):
-		n > 1? Fibonacci(n-1) + Fibonacci(n-2) : n;
+/********************************************************	
+* Solutions for Fibonacci question
+********************************************************/
+Method 1: Iterative method	
+sudo code:
+def Fibonacci(n):
+	n > 1? Fibonacci(n-1) + Fibonacci(n-2) : n;
 
-	Time Complexity: O(2^n). In order to solve F(n), two more F() need to be called. Thus, the time complexity is O(2^n)
+Time Complexity: O(2^n). In order to solve F(n), two more F() need to be called. Thus, the time complexity is O(2^n)
 
-	If we expand the complexity tree, it is not hard to see many redundant nodes. For example, F(n-2) needs to be called twice...F(1)
-	needs to be called 2^n times. If we could avoid the redundant computation and save the previous computation results for next one.
-	It can reduce the exponential time complexit. Here it comes the method 2. 
+If we expand the complexity tree, it is not hard to see many redundant nodes. For example, F(n-2) needs to be called twice...F(1)
+needs to be called 2^n times. If we could avoid the redundant computation and save the previous computation results for next one.
+It can reduce the exponential time complexit. Here it comes the method 2. 
 
-	Method 2: Recursively compute from bottom to top. In order to solve F(n), solve F(2) = F(1) + F(0), save the result of F(2) and
-	F(1), thus F(3) = F(2) + F(1), then save the result of F(3) and F(2) to compute F(4), and so on.
-	
-	def Fibonacci(n):
-		if n <= 1:
-			return n;
-		i = 1; a = 0; b = 1;
-		while i < n:
-			tmp = b;
-			b = a + b;
-			a = tmp;
-			i++
-		return b;
+Method 2: (Dynamic Programming) Recursively compute from bottom to top and use temporary variable to store the intermediate computation result. In order to solve F(n), solve F(2) = F(1) + F(0), save the result of F(2) and F(1), thus F(3) = F(2) + F(1), then save the result of F(3) and F(2) to compute F(4), and so on.
 
-	Method 3: 
+def Fibonacci(n):
+	if n <= 1:
+		return n;
+	i = 1; a = 0; b = 1;
+	while i < n:
+		tmp = b;
+		b = a + b;
+		a = tmp;
+		i++
+	return b;
+
+Time Complexity: O(n)
+
+Method 3: matrix calculation. Use the following formula: {{f(n+1), f(n)}, {f(n), f(n-1)}} = {{1,1},{1,0}}^n (I don't know how this formula is derived.), or {f(n+1), f(n)} = {{1,1}, {1,0}}*{f(n), f(n-1)} => {f(n+1), f(n)} = ({{1,1}, {1,0}}^n) *{f(1), f(0)}. Thus, the calculation of f(n) amount to the resolution of matrix exponential: {{1,1},{1,0}}^n. Because of {{1,1},{1,0}}^n = ( {{1,1},{1,0}}^(n/2) ) ^ 2, the time complexity can be reduced to O(logN)
+
+Additional remark: Any formulas that comply the genral formula: f(n) = af(n-1) + bf(n-1) is called 2nd-order linear recurrence formulas (二阶线性递推式). The time complexity of 2nd-order linear recurrence formulas can be reduced to O(logN) since we can get a 2nd-order matrix to calculate f(n). 
+
+To write the code to calculate {{1,1}, {1,0}}^n, we need to define following atonomy calculation:
+	1) definition of 2nd-order matrix if not in that languate
+	2) 2nd-order (for code simplification) matrix multiplication
+	3) 2nd-order (for code simplification) matrix square
+	4) 2nd-order matrix power
+
+class Solution(object)
+	def matMultip(a, b):
+		for i in xrange(2):
+			for j in xrange(2):
+				for k in xrange(2):
+					c[i,j] = a[i,k] * b[k,j]
+		return c
+
+	def matSquare(a):
+		return matMultip(a,a)
+
+	def matPower(a,n):
+		if n is even:
+			subMat = matPower(a, n/2)
+			return matSquare(subMat)	
+		if n is odd:
+			subMat = matPower(a, (n-1)/2)
+			return matMultip(matSquare(subMat), a) 
+ 
+	def climbStairs(n):
+		mat = matrix([[1,1],[1,0]]) 	
+
+		mat = matPower(mat, n)
+
+		return mat[1,0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
