@@ -10,7 +10,8 @@ class Solution(object):
         """
 
         #return matrix initialization
-        c = numpy.zeros((2,2))
+        #c = numpy.zeros((2,2))
+        c = [[0,0], [0,0]]
 
         for i in xrange(2):
             for j in xrange(2):
@@ -19,8 +20,9 @@ class Solution(object):
                     #print "single multip step"
                     #print "i = " + str(i) + ", j = " + str(j) +", k = " + str(k)
                 
-                    c[i,j] += a[i,k] * b[k,j]
+                    c[i][j] += a[i][k] * b[k][j]
 
+        """
         #debug
         print "in matMultip"
         print "a="
@@ -30,6 +32,7 @@ class Solution(object):
         print "multiplication result"
         print c
         print "-----------------------------"
+        """
         return c
 
     #2nd order square matrix square function
@@ -50,7 +53,6 @@ class Solution(object):
         :rtype: numpy matrix	
         """
 
-        #debug
         #boundary case
         if n == 1:
             return a
@@ -58,21 +60,25 @@ class Solution(object):
         if n%2 == 0: #n is even
             subMat = self.matPower(a, n/2)
             
+            """
             #debug
             print "in matPower()"
             print "subMat for n=" + str(n/2)
             print subMat
             print "-------------------------"
+            """
 
             return self.matSquare(subMat)
         else: #n is odd
             subMat = self.matPower(a, (n-1)/2)
 
+            """
             #debug
             print "in matPower()"
             print "subMat for n=" + str((n-1)/2)
             print subMat
             print "-------------------------"
+            """
 
             return self.matMultip(self.matSquare(subMat), a) 
 
@@ -82,19 +88,22 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        mat = numpy.matrix([[1,1],[1,0]])
+        #mat = numpy.matrix([[1,1],[1,0]])
+        mat = [[1,1],[1,0]]
         mat = self.matPower(mat, n)
 
+        """
         #debug
         print "final result matrix"
         print mat
-        return mat[1,0]
+        """
+        return mat[1][0]
     	
 
 #testcase
 myTest = Solution()
 #print myTest.climbStairs(3);
-print myTest.climbStairs(5);
+print myTest.climbStairs(100);
 #print myTest.climbStairs(5);
 
 
