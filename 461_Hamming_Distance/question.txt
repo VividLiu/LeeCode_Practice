@@ -7,5 +7,31 @@ Note:
 0 ≤ x, y < 231.
 
 /********************************************************	
-* Thinking:
+* Solution
 ********************************************************/
+Method 1: 
+    The most straight forward method is to treat the binary format of these two numbers as string,
+and count how many different bits are there. Using no trick, the time complexity of this brute force
+method is O(max(len(s1), len(s2))).
+
+Method 2:
+    Utilize the bit operation. XOR is a bit operation that outputs 1 only when two inputs are different.
+    So for number a and b, a XOR b will set all different bits to 1. Then count how many 1s in the result
+    of a XOR b, will give the Hamming distance.
+
+Method 3:
+    Use the same bit operation XOR as method 2. However utilize the formula x&(x-1) to count 1s.
+    
+    Some facts:
+    1). Power of 2 has one and only one bit set in their binary representation. Ex. 4 => 0b100
+    2). Every time you perform x&(x-1) operation, a single 1 (the rightmost 1) bit is erased.
+    3). x&(x-1) can be used to determine is x is power of 2 because of fact 2). since the result of x&(x-1) will be zero.
+
+    How does x&(x-1) work?
+    The relationship between x and (x-1) is:
+    As in (x-1), the rightmost 1 and bits right to it are flipped. Thus, by performing x&(x-1), the rightmost 1 is erased. 
+    Ex. x = 52, bin(x) = 0b110100; x-1 = 51, bin(x-1) = ob110011. x&(x-1) => 0b110000
+    Because of this, x&(x-1) can be used to count how many 1s are there in x.
+
+
+
