@@ -1,0 +1,23 @@
+344.
+Write a function that takes a string as input and returns the string reversed.
+
+Example:
+Given s = "hello", return "olleh".
+
+/*********************************************************************************
+ * Thinking
+ ********************************************************************************/
+ To reverse a string, the right half will become left half while the left half will become right half.
+ Thus, if we have two pointers, one points at the start of the string, and the other one points at end
+ of the string. Both of them iterate to the center of the string while swap the letter each time. Then
+ the result will be the reversed string.
+
+/*********************************************************************************
+ * Sudo
+ ********************************************************************************/
+
+ def reverveString(s):
+    l = len(s) 
+    while(i < floor(n/2)):
+        swap (s[i], s[l-1-i])
+
