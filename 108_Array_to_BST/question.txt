@@ -1,0 +1,9 @@
+108.
+    Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+/**********************************************************************************
+ * Thinking
+ *********************************************************************************/
+ Pick the current root value, then recursively convert the left side array to left 
+ subtree, and the right side array to right subtree.
+
