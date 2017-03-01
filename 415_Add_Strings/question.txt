@@ -1,0 +1,37 @@
+415.
+Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+
+Note:
+
+The length of both num1 and num2 is < 5100.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+/***************************************************************************************************
+ * Thinking
+ **************************************************************************************************/
+ The solution of this problem is like writing your own raw adding utility, which is adding each digit
+ from the lowest digit to the highest digit.
+
+ Note if these two strings are not the same length, we can add left padding 0s to the shorter string
+ to ensure they are same length to avoid extra code to handle the rest of un-added string. 
+ Ex. 12345678  =>  12345678
+        78901      00078901
+
+ I thought if I add not only one digit at each time, but add a chulk of digits at each time, it will
+ be more effecient, as long as the chulk of digits don't exceed the maximum integer value. 
+ Ex. 9876543210
+          12345  
+ Each step, I take maximum 9 digits instead of 1 from both strings and add them. Then, the first step  I will add "987654321" and "12345"
+ However, this idea actually complicates the code since I have to handle the case where the chuck of
+ string starts with 0[s]. 
+ Ex. 77087654321
+               3
+ The first 9 digits from the first string would be "087654321". When using int() to convert it to int,
+ it convert to 87654321 and cause the lose of the highest digit.
+
+
+
+
+
