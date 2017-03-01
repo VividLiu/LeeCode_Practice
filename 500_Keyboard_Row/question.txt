@@ -1,0 +1,7 @@
+500. 
+    Given a List of words, return the words that can be typed using letters of alphabet on only one row's of American keyboard
+
+/****************************************************************************************************
+ * Thinking
+ ***************************************************************************************************/`
+ Just choose a convenient data structure to store the keyboard so it is easy to look up the row number for each letter.
