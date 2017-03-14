@@ -1,0 +1,47 @@
+338.
+    Gven a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.  
+    Example:
+    For num = 5 you should return [0,1,1,2,1,2].
+
+    Follow up:
+
+    It is very easy to come up with a solution with run time O(n*sizeof(integer)). But can you do it in linear time O(n) /possibly in a single pass?
+    Space complexity should be O(n).
+    Can you do it like a boss? Do it without using any builtin function like __builtin_popcount in c++ or in any other language.
+
+/****************************************************************************************************
+ * Thinking
+ ***************************************************************************************************/
+    Utilize the result of previous number. Since it is in sequence, the current number is increased byone compared to the previous number, there must be correlation of their binary representation.
+
+    Thus, the problem can be solved by  DP algorithm since the current problem can be broken into sub problems which is essence of DP algorithm.
+
+    We can divide number N into 2 parts. One part is the largest number which is smaller than n and is power of 2, denoted as N'. Another part is the remaining part, (N-N'), denoted as N''. Since we know power of 2 only have 1 bit turned on. Thus we know the # of 1's in N is (# of 1's in N'') plus 1, where (# of 1's in N'') is a sub problem since N'' < N, thus already been calculated in previous steps.
+    Ex. 9 = 2^3 + 1
+        # of 1's in 1 is 1, and # of 1's in 2^3 is 1
+        => answer: 2
+        The binary reprentation of the division is:
+        0b1001 => 0b1000 (the highest one bit) + 0b0001 (the remaining bits)
+
+    Optimization:
+    The current problem doesn't have to be divide to highest one bit part and the remaining part since to obtain the highest one bit isn't that straightforward. As long as the current the current N problem can be divide any sub problems that are already solved in previous steps, we can use DP algorithm. Thus another way to break down the problem and allow us to utilize the bit operation is:
+
+    ans[i] = ans[i>>1] + (i&1)
+    i>>1: right shift i one bit to right, thus i >> 1 will cause i the lowest one bit
+    i&1 : if the lowest one bit of i is 1, i&1 returns 1; otherwise, it returns 0. Thus, it retrieve the lost bit of i>>1.
+    
+    Ex. 11 = 0b1011
+        0b1011 >> 1 => 0b0101
+        0b1011 & 1  => 0b0001  
+        
+
+    
+    
+
+
+
+
+
+
+
+
