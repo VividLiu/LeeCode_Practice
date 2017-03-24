@@ -1,0 +1,35 @@
+513. Find Bottom Left Tree Value
+    Given a binary tree, find the leftmost value in the last row of the tree.
+
+    Example 1:
+    Input:
+
+        2
+       / \
+      1   3
+
+    Output:
+    1
+    Example 2: 
+    Input:
+
+            1
+           / \
+          2   3
+         /   / \
+        4   5   6
+           /
+          7
+
+    Output:
+    7
+    Note: You may assume the tree (i.e., the given root node) is not NULL.
+
+/***************************************************************************************************
+ * Thinking
+ ***************************************************************************************************/
+     This problem can be solved by utilizing BFS algorithm because BFS (bread first traverse) traverse the tree by depth. Then if we modify the basic BFS a little bit, we can get the bottome left tree value, which bascially is the first value encountered while traversing using bfs in the deepest level of the tree.
+
+    BFS:
+    Usually implemented iteratively using FIFO queue structure. 
+
