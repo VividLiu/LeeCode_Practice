@@ -1,0 +1,70 @@
+413. Arithmetic Slices 
+    sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
+
+    For example, these are arithmetic sequence:
+
+    1, 3, 5, 7, 9
+    7, 7, 7, 7
+    3, -1, -5, -9
+    The following sequence is not arithmetic.
+
+    1, 1, 2, 5, 7
+
+    A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 <= P < Q < N.
+
+    A slice (P, Q) of array A is called arithmetic if the sequence:
+    A[P], A[p + 1], ..., A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 < Q.
+
+    The function should return the number of arithmetic slices in the array A.
+
+
+    Example:
+
+    A = [1, 2, 3, 4]
+
+    return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
+
+/****************************************************************************************************
+ *Thinking
+ ***************************************************************************************************/
+ Note:
+    subset: 2^n ( order doesn't matter in sets)
+    subsequence: 2^n ( keep original order, but elements don't have to be consecutive)
+    substring: n(n+1)/2 (Elements must be consecutive in original array)    
+
+    If we find all the substrings (denote as set S) which the difference between any consecutive # are same, the question is equal to calculate the total number of all substrings (length > 3) of any string in S.
+
+    Ex. A = [-1, 0, 1, 3, 5, 7, 3, -1, -5]
+        The substrings which the difference between any consecutive # are same in A are :
+        a1 = [1, 3, 5, 7], a2 = [3,-1,-5]
+        Thus, if we calculate the total number of substring (length > 3) in a1 and a2, it is the answer.
+        There are 4*(4+1)/2 substrings in a1 and among them (4-1) are length of 2, and 4 are length of 1.
+        There are 3*(3+1)/2 substrings in a2 and among them (3-1) are length of 2, and 3 are length of 1.
+        Thus, the answer is 4*(4+1)/2 - (4-1) - 4 + 3*(3+1)/2 - (3-1) + 3
+
+
+/****************************************************************************************************
+ * Solution
+ ***************************************************************************************************/
+ Use dynamic programming
+ The total number of all arithmetic slices can be calculated by how many arithmetic slices can end with each A[i], i: 0->N
+
+ dp[i]: the # of arithmetic slices ending with A[i]
+
+ if (A[i-2], A[i-1], A[i] ) is arithmetic slice, which means (A[i] - A[i-1] == A[i-1] - A[i-2]). Then, dp[i], the number of arithmetic slices ending with i, is equal to 
+ all the arithmetic slices ending with A[i-1] appended with A[i]
+ +
+ a brand new arithmetic slice, (A[i-2], A[i-1], A[i]),
+ which is:
+ dp[i-1] + 1
+
+ dp[i] = 0:             if A[i] - A[i-1] != A[i-1] - A[i-2]
+       = dp[i-1] + 1:   if A[i] - A[i-1] == A[i-1] - A[i-2]
+
+ dp[0] = dp[1] = 0
+
+ return sum(dp[0] -> dp[N])
+
+
+
+
