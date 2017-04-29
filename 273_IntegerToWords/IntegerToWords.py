@@ -1,4 +1,8 @@
-class Solution(object):
+"""
+Separate the number into groups: ones, thousands, millisons, billions, and so one.
+Each group contains a subgroup which consis of at most three numbers: ones, tens, hundreds.
+"""
+class Solution2(object):
     _debug = 0
 
     def numberToWords(self, num):
@@ -94,7 +98,57 @@ class Solution(object):
             print "     Return poriton word is " + r
 
         return r
+
+
+"""
+Solution:
+More concised one
+"""
+class Solution(object):
+    _debug = 1
+
+    #nums < 20 are special words
+    _lessThan20 = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
+    _tens = ['', 'Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']
+    _thousands = ['', 'Thousand', 'Million', 'Billion']
+
+    def numberToWords(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        if num == 0:
+            return "Zero"
         
+        res = "" #return result 
+        i = 0
+        while num != 0:
+            portion = num % 1000 
+            num = num / 1000
+            
+            if self._debug:
+                print "portion: " + str(portion) + " num: " + str(num) 
+
+            if portion:
+                res = self.portionConvert(portion) + self._thousands[i] + " " + res
+            i += 1
+            
+        return res.strip() #trimming left and right padding spaces
+
+    def portionConvert(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        if num == 0:
+            return ""
+        elif num < 20:
+            return self._lessThan20[num] + " "
+        elif num < 100: #20<=num<100
+            return self._tens[num/10] + " " + self.portionConvert(num%10])     
+        else: #100<=num <= 999
+            return self._lessThan20[num/100] + " Hundred " + self.portionConvert(num%100)
+
 """
 test
 """ 
