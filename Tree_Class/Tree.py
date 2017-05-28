@@ -144,13 +144,37 @@ class Tree(object):
 
         print rlist
 
+#********************************************************************** 
+#Output the flattened tree structure in level traversal sequence
+#**********************************************************************
+def bfsNodePrint(rootNode):
+    """
+    :type t: TreeNoe
+    """
+    if rootNode is None:
+        print []
+
+    #return list, level traversal sequence of tree
+    rlist = []
+
+    #bfs queue
+    queue = [rootNode]
+
+    while len(queue) != 0:
+        e = queue.pop(0)
+
+        if e is not None:
+            rlist.append(e.val)
+
+            queue.append(e.left) #even if e.left or e.right is None, enqueue
+            queue.append(e.right)
+        else:
+            rlist.append(None)
+
+    print rlist
 
 """
 test
 """
 myTree = Tree([3,2,4,1,None,5,6])
 myTree.bfsPrint()
-
-        
-        
-
