@@ -1,0 +1,6 @@
+46. 
+Give a string with distinct character, generate all permuation of the string.
+
+For example: 
+Input: 'abc'
+Output: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
