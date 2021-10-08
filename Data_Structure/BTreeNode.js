@@ -15,15 +15,14 @@ class TreeNode {
         this.left = left || null; 
         this.right = right || null;
 
-        // console.log('constructor this: ', this);
-        this.flatten = this.flatten.bind(this);
-        this.array = this.flatten();
     }
 
-    // convert TreeNode into array representation
-    flatten() {
+}
+
+// convert TreeNode into array representation
+function treeToArray(root){
         const res = [];
-        const stack = [this];
+        const stack = [root];
 
         function bfs() {
             while(stack && stack.length) {
@@ -46,15 +45,14 @@ class TreeNode {
             i--
         }
         return res;
-    }
-
-    // define customer console.log behavior 
-    print() {
-        console.log(this.array);
-    }
 }
 
-const t = new TreeNode(3, new TreeNode(2, null, new TreeNode(1)), new TreeNode(4));
-// const t = new TreeNode(3, new TreeNode(2), new TreeNode(4));
+/*
+ * Test Case
+ */
+// const t = new TreeNode(3, new TreeNode(2, null, new TreeNode(1)), new TreeNode(4));
 
-t.print();
+module.exports = {
+    TreeNode: TreeNode,
+    treeToArray: treeToArray
+}

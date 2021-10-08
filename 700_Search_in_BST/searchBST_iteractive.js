@@ -1,4 +1,3 @@
-const { TreeNode, treeToArray } = require('../Data_Structure/BTreeNode');
 
 /**
  * Definition for a binary tree node.
@@ -14,15 +13,14 @@ const { TreeNode, treeToArray } = require('../Data_Structure/BTreeNode');
  * @return {TreeNode}
  */
 var searchBST = function(root, val) {
-    if(root === null){
-        return root
+    while(root) {
+        if(root.val === val) {
+            return root;
+        } else if(val < root.val) {
+            root = root.left;
+        } else {
+            root = root.right;
+        }
     }
-    if(root.val === val) {
-        return root
-    }
-    if(val < root.val) {
-        return searchBST(root.left, val)
-    }else {
-        return searchBST(root.right, val)
-    }
+    return null;
 };
