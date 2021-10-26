@@ -100,11 +100,8 @@ console.log(extractNumber('-123)', 0));
 console.log(extractNumber('-1', 0));
 console.log(extractNumber('123', 0));
 console.log(extractNumber('-123(2)', 0));
-*/
-
 console.log(treeToArray(str2tree('')));
 console.log(treeToArray(str2tree('-1')));
 console.log(treeToArray(str2tree('3(9)(20(5)(7))')));
 console.log(treeToArray(str2tree('12(5(2)(9))(18(15(13()(14)))(19))')));
-/*
 */

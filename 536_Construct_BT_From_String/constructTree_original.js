@@ -81,6 +81,12 @@ function str2tree(input) {
 /**
  * Test case
  */
+/*
 console.log(treeToArray(str2tree('-1')));
 console.log(treeToArray(str2tree('3(9)(20(5)(7))')));
 console.log(treeToArray(str2tree('12(5(2)(9))(18(15(13()(14)))(19))')));
+*/
+
+module.exports = {
+    str2tree
+}
