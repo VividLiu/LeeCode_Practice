@@ -1,0 +1,5 @@
+226.Given the root of a binary tree, invert the tree, and return its root.
+
+    2             2 
+  /   \   =>    /   \
+1      3      3       1
