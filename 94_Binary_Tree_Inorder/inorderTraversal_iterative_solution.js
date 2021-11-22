@@ -15,11 +15,9 @@ const { str2tree } = require('../536_Construct_BT_From_String/constructTree_orig
  */
 
 /*
- * Put (node, isLeftDone) tuple into stack,
- * if isLeftDone flag is set, it means left subtree of node is processed,
- * we can pop node and push right child into stack,
- * if isLeftDoen flag is not set, it means left sutree of node is not processed,
- * then we push left child into stack and set the flag.
+ * Reference: https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45559/My-Accepted-code-with-explaination.-Does-anyone-have-a-better-idea 
+ *
+ * For inorder traversal, we visit a node when pushing its right child in stack. 
  * 
  * Time complexity: O(n), n is # of nodes in the tree.
  * Space complexity: O(h), h is the height of the tee.
