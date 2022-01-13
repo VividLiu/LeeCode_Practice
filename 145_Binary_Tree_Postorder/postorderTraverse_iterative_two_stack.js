@@ -16,6 +16,12 @@
  * Iteration using two stacks 
  * 
  * Reference: https://www.geeksforgeeks.org/iterative-postorder-traversal/
+ * "The idea is to push reverse postorder traversal to a stack. 
+ * Once we have the reversed postorder traversal in a stack, 
+ * we can just pop all items one by one from the stack and print them; 
+ * this order of printing will be in postorder because of the LIFO property of stacks. 
+ * Now the question is, how to get reversed postorder elements in a stack – 
+ * the second stack is used for this purpose."
  */
 var postorderTraversal = function(root) {
     const res = [];
